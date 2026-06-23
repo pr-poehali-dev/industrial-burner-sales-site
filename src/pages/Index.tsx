@@ -5,60 +5,60 @@ import { Button } from '@/components/ui/button';
 const HERO_IMG =
   'https://cdn.poehali.dev/projects/f3d07043-9a46-4c66-8100-2be86ce83116/files/51fb3b12-fdcb-4ad0-b026-f65cb6a4ba37.jpg';
 
-type Fuel = 'Газ' | 'Дизель' | 'Мазут' | 'Комбинированная';
-
 interface Burner {
   id: number;
   name: string;
   series: string;
-  fuel: Fuel;
   power: number; // кВт
-  temp: number; // °C
-  price: string;
+  variants: string[];
 }
 
 const BURNERS: Burner[] = [
-  { id: 1, name: 'ВГ-150', series: 'Vulcan', fuel: 'Газ', power: 150, temp: 1100, price: '142 000 ₽' },
-  { id: 2, name: 'ВД-220', series: 'Vulcan', fuel: 'Дизель', power: 220, temp: 1250, price: '198 000 ₽' },
-  { id: 3, name: 'ТК-400', series: 'Titan', fuel: 'Комбинированная', power: 400, temp: 1400, price: '356 000 ₽' },
-  { id: 4, name: 'ТМ-600', series: 'Titan', fuel: 'Мазут', power: 600, temp: 1350, price: '412 000 ₽' },
-  { id: 5, name: 'ФГ-90', series: 'Forge', fuel: 'Газ', power: 90, temp: 950, price: '96 000 ₽' },
-  { id: 6, name: 'ФД-320', series: 'Forge', fuel: 'Дизель', power: 320, temp: 1300, price: '274 000 ₽' },
-  { id: 7, name: 'ПК-900', series: 'Prometheus', fuel: 'Комбинированная', power: 900, temp: 1500, price: '688 000 ₽' },
-  { id: 8, name: 'ПГ-1200', series: 'Prometheus', fuel: 'Газ', power: 1200, temp: 1450, price: '845 000 ₽' },
+  { id: 1,  name: 'BLU 700.1',   series: 'Ecoflam BLU', power: 700,   variants: ['PAB', 'LN', 'PR', 'LN PR', 'LN PR TL', 'LN PAB TL', 'LN PAB TC'] },
+  { id: 2,  name: 'BLU 1000.1',  series: 'Ecoflam BLU', power: 1000,  variants: ['PAB', 'LN', 'PR', 'LN PR', 'LN PR TL', 'PAB TL', 'PAB TC'] },
+  { id: 3,  name: 'BLU 1200.1',  series: 'Ecoflam BLU', power: 1200,  variants: ['PAB', 'PR', 'PAB TL', 'PR TL'] },
+  { id: 4,  name: 'BLU 1500.1',  series: 'Ecoflam BLU', power: 1500,  variants: ['PAB', 'LN', 'LN PR', 'LN PR TL', 'PAB TL'] },
+  { id: 5,  name: 'BLU 1700.1',  series: 'Ecoflam BLU', power: 1700,  variants: ['PAB', 'PAB TC', 'PAB TL'] },
+  { id: 6,  name: 'BLU 1700.2',  series: 'Ecoflam BLU', power: 1700,  variants: ['PAB', 'PAB TC', 'PAB TL'] },
+  { id: 7,  name: 'BLU 2000.1',  series: 'Ecoflam BLU', power: 2000,  variants: ['PAB', 'PAB TC', 'PAB TC LPG'] },
+  { id: 8,  name: 'BLU 2500.2',  series: 'Ecoflam BLU', power: 2500,  variants: ['PRE', 'PRE TL'] },
+  { id: 9,  name: 'BLU 3000.1',  series: 'Ecoflam BLU', power: 3000,  variants: ['PRE', 'PRE TL'] },
+  { id: 10, name: 'BLU 4000.1',  series: 'Ecoflam BLU', power: 4000,  variants: ['PRE'] },
+  { id: 11, name: 'BLU 5000.1',  series: 'Ecoflam BLU', power: 5000,  variants: ['PRE'] },
+  { id: 12, name: 'BLU 6000.1',  series: 'Ecoflam BLU', power: 6000,  variants: ['PRE'] },
+  { id: 13, name: 'BLU 7000.1',  series: 'Ecoflam BLU', power: 7000,  variants: ['PRE'] },
+  { id: 14, name: 'BLU 8000.1',  series: 'Ecoflam BLU', power: 8000,  variants: ['PRE'] },
+  { id: 15, name: 'BLU 10000.1', series: 'Ecoflam BLU', power: 10000, variants: ['PRE'] },
+  { id: 16, name: 'BLU 12000.1', series: 'Ecoflam BLU', power: 12000, variants: ['PRE'] },
+  { id: 17, name: 'BLU 15000.1', series: 'Ecoflam BLU', power: 15000, variants: ['PRE'] },
+  { id: 18, name: 'BLU 18000.1', series: 'Ecoflam BLU', power: 18000, variants: ['PRE'] },
 ];
 
-const FUEL_OPTIONS: Fuel[] = ['Газ', 'Дизель', 'Мазут', 'Комбинированная'];
-const FUEL_ICONS: Record<Fuel, string> = {
-  Газ: 'Flame',
-  Дизель: 'Droplet',
-  Мазут: 'Fuel',
-  Комбинированная: 'Combine',
-};
-
 const Index = () => {
-  const [fuels, setFuels] = useState<Fuel[]>([]);
+  const [selectedVariants, setSelectedVariants] = useState<string[]>([]);
   const [minPower, setMinPower] = useState(0);
-  const [minTemp, setMinTemp] = useState(0);
+  const [maxPower, setMaxPower] = useState(18000);
 
-  const toggleFuel = (f: Fuel) =>
-    setFuels((p) => (p.includes(f) ? p.filter((x) => x !== f) : [...p, f]));
+  const ALL_VARIANTS = ['PAB', 'LN', 'PR', 'LN PR', 'LN PR TL', 'LN PAB TL', 'LN PAB TC', 'PAB TL', 'PAB TC', 'PAB TC LPG', 'PRE', 'PRE TL'];
+
+  const toggleVariant = (v: string) =>
+    setSelectedVariants((p) => (p.includes(v) ? p.filter((x) => x !== v) : [...p, v]));
 
   const filtered = useMemo(
     () =>
       BURNERS.filter(
         (b) =>
-          (fuels.length === 0 || fuels.includes(b.fuel)) &&
           b.power >= minPower &&
-          b.temp >= minTemp,
+          b.power <= maxPower &&
+          (selectedVariants.length === 0 || selectedVariants.some((v) => b.variants.includes(v))),
       ),
-    [fuels, minPower, minTemp],
+    [selectedVariants, minPower, maxPower],
   );
 
   const resetFilters = () => {
-    setFuels([]);
+    setSelectedVariants([]);
     setMinPower(0);
-    setMinTemp(0);
+    setMaxPower(18000);
   };
 
   return (
@@ -164,60 +164,54 @@ const Index = () => {
             </div>
 
             <div className="mb-6">
-              <label className="mb-3 block font-display text-sm uppercase tracking-wide text-muted-foreground">
-                Тип топлива
-              </label>
-              <div className="space-y-2">
-                {FUEL_OPTIONS.map((f) => (
-                  <button
-                    key={f}
-                    onClick={() => toggleFuel(f)}
-                    className={`flex w-full items-center gap-3 border px-3 py-2 text-left text-sm transition-colors ${
-                      fuels.includes(f)
-                        ? 'border-accent bg-accent/10 text-foreground'
-                        : 'border-border bg-background text-muted-foreground hover:border-accent/50'
-                    }`}
-                  >
-                    <Icon
-                      name={FUEL_ICONS[f]}
-                      size={16}
-                      className={fuels.includes(f) ? 'text-accent' : ''}
-                    />
-                    {f}
-                    {fuels.includes(f) && <Icon name="Check" size={14} className="ml-auto text-accent" />}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-6">
               <label className="mb-2 flex items-center justify-between font-display text-sm uppercase tracking-wide text-muted-foreground">
-                Мощность <span className="text-accent">от {minPower} кВт</span>
+                Мощность от <span className="text-accent">{minPower.toLocaleString()} кВт</span>
               </label>
               <input
                 type="range"
                 min={0}
-                max={1200}
-                step={50}
+                max={18000}
+                step={500}
                 value={minPower}
                 onChange={(e) => setMinPower(Number(e.target.value))}
                 className="w-full accent-[hsl(18,95%,54%)]"
               />
             </div>
 
-            <div>
+            <div className="mb-6">
               <label className="mb-2 flex items-center justify-between font-display text-sm uppercase tracking-wide text-muted-foreground">
-                Темп. горения <span className="text-accent">от {minTemp} °C</span>
+                Мощность до <span className="text-accent">{maxPower.toLocaleString()} кВт</span>
               </label>
               <input
                 type="range"
                 min={0}
-                max={1500}
-                step={50}
-                value={minTemp}
-                onChange={(e) => setMinTemp(Number(e.target.value))}
+                max={18000}
+                step={500}
+                value={maxPower}
+                onChange={(e) => setMaxPower(Number(e.target.value))}
                 className="w-full accent-[hsl(18,95%,54%)]"
               />
+            </div>
+
+            <div>
+              <label className="mb-3 block font-display text-sm uppercase tracking-wide text-muted-foreground">
+                Исполнение
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {ALL_VARIANTS.map((v) => (
+                  <button
+                    key={v}
+                    onClick={() => toggleVariant(v)}
+                    className={`border px-2 py-1 text-xs font-display uppercase tracking-wide transition-colors ${
+                      selectedVariants.includes(v)
+                        ? 'border-accent bg-accent/10 text-foreground'
+                        : 'border-border bg-background text-muted-foreground hover:border-accent/50'
+                    }`}
+                  >
+                    {v}
+                  </button>
+                ))}
+              </div>
             </div>
           </aside>
 
@@ -237,27 +231,32 @@ const Index = () => {
                   >
                     <div className="flex items-center justify-between border-b border-border bg-secondary/40 px-5 py-3">
                       <span className="font-display text-xs uppercase tracking-widest text-muted-foreground">
-                        Серия {b.series}
+                        {b.series}
                       </span>
-                      <Icon name={FUEL_ICONS[b.fuel]} size={18} className="text-accent" />
+                      <Icon name="Flame" size={18} className="text-accent" />
                     </div>
                     <div className="flex flex-1 flex-col p-5">
                       <h3 className="font-display text-2xl font-700 uppercase">{b.name}</h3>
-                      <span className="mb-4 text-sm text-muted-foreground">{b.fuel}</span>
-                      <dl className="mb-5 space-y-2 text-sm">
+                      <dl className="mb-4 mt-2 space-y-2 text-sm">
                         <div className="flex items-center justify-between border-b border-dashed border-border pb-1">
                           <dt className="text-muted-foreground">Мощность</dt>
-                          <dd className="font-display font-600">{b.power} кВт</dd>
+                          <dd className="font-display font-600">{b.power.toLocaleString()} кВт</dd>
                         </div>
                         <div className="flex items-center justify-between border-b border-dashed border-border pb-1">
-                          <dt className="text-muted-foreground">Темп. горения</dt>
-                          <dd className="font-display font-600">{b.temp} °C</dd>
+                          <dt className="text-muted-foreground">Исполнений</dt>
+                          <dd className="font-display font-600">{b.variants.length}</dd>
                         </div>
                       </dl>
-                      <div className="mt-auto flex items-center justify-between">
-                        <span className="font-display text-lg font-700 text-accent">{b.price}</span>
-                        <Button asChild size="sm" variant="outline" className="font-display uppercase tracking-wider">
-                          <a href="#contacts">Запросить</a>
+                      <div className="mb-4 flex flex-wrap gap-1">
+                        {b.variants.map((v) => (
+                          <span key={v} className="border border-border bg-secondary/50 px-2 py-0.5 font-display text-[10px] uppercase tracking-wide text-muted-foreground">
+                            {v}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-auto">
+                        <Button asChild size="sm" className="w-full bg-accent font-display uppercase tracking-wider hover:bg-accent/90">
+                          <a href="#contacts">Запросить цену</a>
                         </Button>
                       </div>
                     </div>
