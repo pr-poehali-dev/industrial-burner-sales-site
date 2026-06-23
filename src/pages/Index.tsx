@@ -118,7 +118,7 @@ const Index = () => {
             </div>
             <div className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-white/10 pt-6">
               {[
-                ['1200', 'кВт макс. мощность'],
+                ['17 000', 'кВт макс. мощность'],
                 ['1500', '°C темп. горения'],
                 ['15 лет', 'на рынке'],
               ].map(([n, l]) => (
