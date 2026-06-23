@@ -3,7 +3,7 @@ import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 
 const HERO_IMG =
-  'https://cdn.poehali.dev/projects/f3d07043-9a46-4c66-8100-2be86ce83116/files/51fb3b12-fdcb-4ad0-b026-f65cb6a4ba37.jpg';
+  'https://cdn.poehali.dev/projects/f3d07043-9a46-4c66-8100-2be86ce83116/files/4ae86c3a-297c-4257-bfee-91744f96430d.jpg';
 
 interface Burner {
   id: number;
