@@ -99,7 +99,7 @@ const Index = () => {
         <div className="container relative grid items-center gap-10 py-20 md:grid-cols-2 md:py-28">
           <div className="animate-fade-in">
             <div className="mb-5 inline-flex items-center gap-2 border border-white/15 px-3 py-1 text-xs uppercase tracking-widest text-white/70">
-              <span className="h-1.5 w-1.5 bg-accent" /> Производство с 2004 года
+              <span className="h-1.5 w-1.5 bg-accent" /> Производство с 2011 года
             </div>
             <h1 className="font-display text-4xl font-700 uppercase leading-[1.05] tracking-tight md:text-6xl">
               Промышленные<br />горелки для<br /><span className="text-accent">котлов и печей</span>
@@ -120,7 +120,7 @@ const Index = () => {
               {[
                 ['1200', 'кВт макс. мощность'],
                 ['1500', '°C темп. горения'],
-                ['18 лет', 'на рынке'],
+                ['15 лет', 'на рынке'],
               ].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-2xl font-700 text-accent">{n}</div>
