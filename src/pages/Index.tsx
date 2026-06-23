@@ -332,9 +332,9 @@ const Index = () => {
             </p>
             <div className="mt-8 space-y-4">
               {[
-                ['Phone', '+7 (495) 120-45-67', 'Пн–Пт, 9:00–18:00'],
-                ['Mail', 'sales@teploenergo.ru', 'отдел продаж'],
-                ['MapPin', 'г. Москва, ул. Заводская, 12', 'производство и офис'],
+                ['Phone', '+7 (863) 226-13-69', 'Пн–Пт, 9:00–18:00'],
+                ['Mail', 'rtbn@inbox.ru', 'отдел продаж'],
+                ['MapPin', 'Ростовская обл., п. Целина, 12-я линия д. 39', 'производство и офис'],
               ].map(([icon, t, d]) => (
                 <div key={t} className="flex items-center gap-4">
                   <span className="flex h-11 w-11 items-center justify-center border border-border bg-secondary/40">
