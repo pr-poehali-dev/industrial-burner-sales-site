@@ -35,6 +35,8 @@ const BURNERS: Burner[] = [
 ];
 
 const Index = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [selectedVariants, setSelectedVariants] = useState<string[]>([]);
   const [minPower, setMinPower] = useState(0);
   const [maxPower, setMaxPower] = useState(18000);
@@ -87,8 +89,8 @@ const Index = () => {
               </a>
             ))}
           </nav>
-          <Button asChild className="hidden bg-accent font-display uppercase tracking-wider hover:bg-accent/90 md:inline-flex">
-            <a href="#contacts">Заказать КП</a>
+          <Button onClick={() => { setModalOpen(true); setSubmitted(false); }} className="hidden bg-accent font-display uppercase tracking-wider hover:bg-accent/90 md:inline-flex">
+            Заказать КП
           </Button>
         </div>
       </header>
@@ -401,6 +403,66 @@ const Index = () => {
           <p className="text-sm text-white/50">© 2026 ТеплоЭнерго. Промышленное горелочное оборудование</p>
         </div>
       </footer>
+
+      {/* Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
+          <div className="relative w-full max-w-md border border-border bg-background shadow-2xl animate-fade-in">
+            <div className="flex items-center justify-between border-b border-border bg-secondary/40 px-6 py-4">
+              <h2 className="font-display text-lg font-700 uppercase tracking-wide">Заказать коммерческое предложение</h2>
+              <button onClick={() => setModalOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">
+                <Icon name="X" size={20} />
+              </button>
+            </div>
+            {submitted ? (
+              <div className="flex flex-col items-center gap-4 px-6 py-12 text-center">
+                <span className="flex h-16 w-16 items-center justify-center bg-accent/10">
+                  <Icon name="CheckCircle" size={36} className="text-accent" />
+                </span>
+                <h3 className="font-display text-xl font-700 uppercase">Заявка отправлена!</h3>
+                <p className="text-sm text-muted-foreground">Наш менеджер свяжется с вами в течение рабочего дня.</p>
+                <Button onClick={() => setModalOpen(false)} className="mt-2 bg-accent font-display uppercase tracking-wider hover:bg-accent/90">
+                  Закрыть
+                </Button>
+              </div>
+            ) : (
+              <form
+                onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+                className="space-y-4 p-6"
+              >
+                {[
+                  ['Ваше имя', 'text', 'Иван Петров'],
+                  ['Компания', 'text', 'ООО «Завод»'],
+                  ['Телефон', 'tel', '+7 (___) ___-__-__'],
+                ] .map(([label, type, ph]) => (
+                  <div key={label}>
+                    <label className="mb-1.5 block font-display text-xs uppercase tracking-wide text-muted-foreground">{label}</label>
+                    <input
+                      type={type}
+                      placeholder={ph}
+                      required
+                      className="w-full border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-accent"
+                    />
+                  </div>
+                ))}
+                <div>
+                  <label className="mb-1.5 block font-display text-xs uppercase tracking-wide text-muted-foreground">Задача</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Опишите оборудование и требования к горелке"
+                    className="w-full resize-none border border-border bg-background px-4 py-3 text-sm outline-none transition-colors focus:border-accent"
+                  />
+                </div>
+                <Button type="submit" size="lg" className="w-full bg-accent font-display uppercase tracking-wider hover:bg-accent/90">
+                  Отправить заявку
+                </Button>
+                <p className="text-center text-xs text-muted-foreground">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
