@@ -131,12 +131,18 @@ const Index = () => {
             </div>
           </div>
           <div className="relative animate-fade-in">
-            <div className="absolute -inset-4 bg-accent/10 blur-2xl" />
-            <img
-              src={HERO_IMG}
-              alt="Промышленная горелка"
-              className="relative w-full border border-white/10 object-cover shadow-2xl"
-            />
+            <div className="absolute -inset-8 bg-accent/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-sm border border-white/10 shadow-2xl"
+              style={{ background: 'radial-gradient(ellipse at center, #1a1f2e 0%, #0d1018 100%)' }}>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+              <img
+                src={HERO_IMG}
+                alt="Промышленные горелки Ecoflam"
+                className="relative w-full object-contain p-4 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+                style={{ mixBlendMode: 'luminosity', filter: 'contrast(1.05) brightness(0.97)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
+            </div>
           </div>
         </div>
       </section>
