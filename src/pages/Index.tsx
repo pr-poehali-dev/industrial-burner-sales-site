@@ -70,7 +70,7 @@ const Index = () => {
             <span className="flex h-9 w-9 items-center justify-center bg-accent">
               <Icon name="Flame" size={20} className="text-accent-foreground animate-flame" />
             </span>
-            <span className="font-display text-xl font-700 tracking-wide">ПРОМ<span className="text-accent">ГОРЕЛКА</span></span>
+            <span className="font-display text-xl font-700 tracking-wide">ТЕПЛО<span className="text-accent">ЭНЕРГО</span></span>
           </a>
           <nav className="hidden items-center gap-8 md:flex">
             {[
@@ -279,7 +279,7 @@ const Index = () => {
               Инженерный подход к теплу
             </h2>
             <p className="mt-5 text-muted-foreground">
-              «ПромГорелка» — российский производитель горелочного оборудования для промышленных
+              «ТеплоЭнерго» — российский производитель горелочного оборудования для промышленных
               котлов, печей и сушильных камер. Мы проектируем, изготавливаем и обслуживаем
               горелки под конкретные задачи заказчика — от пищевых производств до металлургии.
             </p>
@@ -336,7 +336,7 @@ const Index = () => {
             <div className="mt-8 space-y-4">
               {[
                 ['Phone', '+7 (495) 120-45-67', 'Пн–Пт, 9:00–18:00'],
-                ['Mail', 'sales@promgorelka.ru', 'отдел продаж'],
+                ['Mail', 'sales@teploenergo.ru', 'отдел продаж'],
                 ['MapPin', 'г. Москва, ул. Заводская, 12', 'производство и офис'],
               ].map(([icon, t, d]) => (
                 <div key={t} className="flex items-center gap-4">
@@ -399,9 +399,9 @@ const Index = () => {
             <span className="flex h-8 w-8 items-center justify-center bg-accent">
               <Icon name="Flame" size={18} className="text-accent-foreground" />
             </span>
-            <span className="font-display font-700 tracking-wide">ПРОМ<span className="text-accent">ГОРЕЛКА</span></span>
+            <span className="font-display font-700 tracking-wide">ТЕПЛО<span className="text-accent">ЭНЕРГО</span></span>
           </div>
-          <p className="text-sm text-white/50">© 2026 ПромГорелка. Промышленное горелочное оборудование</p>
+          <p className="text-sm text-white/50">© 2026 ТеплоЭнерго. Промышленное горелочное оборудование</p>
         </div>
       </footer>
     </div>
